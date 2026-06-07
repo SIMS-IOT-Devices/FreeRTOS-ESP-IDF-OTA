@@ -1,0 +1,17 @@
+BIN_files_for_OTA
+
+idf.py menuconfig
+1. Partition Table -> Partition Table (Factory app, two OTA definitions) -> Factory app, two OTA definitions
+2. Serial flasher config -> Flash size -> 4MB
+
+idf.py partition-table
+# Name, Type, SubType, Offset, Size, Flags
+nvs,data,nvs,0x9000,16K,
+otadata,data,ota,0xd000,8K,
+phy_init,data,phy,0xf000,4K,
+factory,app,factory,0x10000,1M,
+ota_0,app,ota_0,0x110000,1M,
+ota_1,app,ota_1,0x210000,1M,
+
+esptool.py --chip esp32  write_flash 0x110000 proj1.bin
+esptool.py --chip esp32  write_flash 0x210000 proj2.bin
