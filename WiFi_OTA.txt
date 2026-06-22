@@ -1,0 +1,14 @@
+Copy proj4.bin to root directory of the project
+
+idf.py menuconfig
+1. Partition Table → Partition Table (Factory app, two OTA definitions) -> Factory app, two OTA definitions
+2. Serial flasher config → Flash size → 4MB
+3. Component config → ESP HTTPS OTA → Allow HTTP for OTA
+
+ESP-IDF commands:
+idf.py set-target esp32c3
+idf.py build flash monitor
+idf.py partition-table
+
+Run Python Server for ESP32 Client from the project root:
+python -m http.server 8000
